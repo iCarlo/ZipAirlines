@@ -24,3 +24,10 @@ def airplane_list(request):
     airplanes = Airplanes.objects.all()
     serializer = AirplanesSerializer(airplanes, many=True)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def airplane_detail(request, pk):
+    airplanes = Airplanes.objects.get(id=pk)
+    serializer = AirplanesSerializer(airplanes, many=False)
+    return Response(serializer.data)
