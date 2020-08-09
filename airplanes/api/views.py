@@ -31,3 +31,13 @@ def airplane_detail(request, pk):
     airplanes = Airplanes.objects.get(id=pk)
     serializer = AirplanesSerializer(airplanes, many=False)
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+def airplane_add(request):
+    serializer = AirplanesSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    else:
+        return Response(serializer.errors)
