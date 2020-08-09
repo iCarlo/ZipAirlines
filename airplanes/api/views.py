@@ -52,3 +52,11 @@ def airplane_update(request, pk):
         return Response(serializer.data)
     else:
         return Response(serializer.errors)
+
+
+@api_view(['DELETE'])
+def airplane_delete(request, pk):
+    airplane = Airplanes.objects.get(id=pk)
+    airplane.delete()
+
+    return Response("Item successfully deleted")
